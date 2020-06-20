@@ -17,7 +17,7 @@ public class CriptografiaCesariana implements Criptografia {
         
         for (int i = 0; i < quantidadeDeCaracteres; i++) {
             codigoDecimalDoCaractere = texto.toLowerCase().charAt(i);
-            textoCriptografado.append((char) this.encriptar(codigoDecimalDoCaractere));
+            textoCriptografado.append((char) this.encriptarLetra(codigoDecimalDoCaractere));
         }
         
         return textoCriptografado.toString();
@@ -34,13 +34,13 @@ public class CriptografiaCesariana implements Criptografia {
         
         for (int i = 0; i < quantidadeDeCaracteres; i++) {
             codigoDecimalDoCaractere = texto.toLowerCase().charAt(i);
-            textoDescriptografado.append((char) this.descriptar(codigoDecimalDoCaractere));
+            textoDescriptografado.append((char) this.descriptarLetra(codigoDecimalDoCaractere));
         }
         
         return textoDescriptografado.toString();
     }
     
-    private int encriptar(int decimalDoCaractere) {
+    private int encriptarLetra(int decimalDoCaractere) {
         if (decimalDoCaractere > 96 && decimalDoCaractere < 120) {
             codigoDecimal = decimalDoCaractere + chaveDeCriptografia; 
         }else if (decimalDoCaractere > 119) {
@@ -51,7 +51,7 @@ public class CriptografiaCesariana implements Criptografia {
         return codigoDecimal;        
     }
     
-    private int descriptar(int decimalDoCaractere) {
+    private int descriptarLetra(int decimalDoCaractere) {
         if (decimalDoCaractere > 99 && decimalDoCaractere < 123) {
             codigoDecimal = decimalDoCaractere - chaveDeCriptografia; 
         }else if (decimalDoCaractere > 96 && decimalDoCaractere < 100) {
