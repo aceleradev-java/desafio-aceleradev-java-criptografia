@@ -2,6 +2,10 @@ package challenge;
 
 public class CriptografiaCesariana implements Criptografia {
 
+    private int codigoDecimalDoCaractere = 0;
+    private int codigoDecimal = 0;
+    private int chaveDeCriptografia = 3;
+    
     @Override
     public String criptografar(String texto) {
         if (texto.isEmpty()) {
@@ -9,23 +13,14 @@ public class CriptografiaCesariana implements Criptografia {
         }
 
         int quantidadeDeCaracteres = texto.length();
-        String textoCriptografado = new String();
-        int decimalDoCaractere;
-        int decimalComSalto = 0;
+        StringBuilder textoCriptografado = new StringBuilder();
         
         for (int i = 0; i < quantidadeDeCaracteres; i++) {
-            decimalDoCaractere = texto.toLowerCase().charAt(i);
-            if (decimalDoCaractere > 96 && decimalDoCaractere < 120) {
-                decimalComSalto = decimalDoCaractere + 3; 
-            }else if (decimalDoCaractere > 119) {
-                decimalComSalto = decimalDoCaractere - (26 - 3);
-            } else {
-                decimalComSalto = decimalDoCaractere;
-            }
-            textoCriptografado += (char) decimalComSalto;
+            codigoDecimalDoCaractere = texto.toLowerCase().charAt(i);
+            textoCriptografado.append((char) this.encriptar(codigoDecimalDoCaractere));
         }
         
-        return textoCriptografado;
+        return textoCriptografado.toString();
     }
 
     @Override
@@ -35,22 +30,35 @@ public class CriptografiaCesariana implements Criptografia {
         }
 
         int quantidadeDeCaracteres = texto.length();
-        String textoDescriptografado = new String();
-        int decimalDoCaractere;
-        int decimalComSalto = 0;
+        StringBuilder textoDescriptografado = new StringBuilder();
         
         for (int i = 0; i < quantidadeDeCaracteres; i++) {
-            decimalDoCaractere = texto.toLowerCase().charAt(i);
-            if (decimalDoCaractere > 99 && decimalDoCaractere < 122) {
-                decimalComSalto = decimalDoCaractere - 3; 
-            }else if (decimalDoCaractere > 96 && decimalDoCaractere < 100) {
-                decimalComSalto = decimalDoCaractere + (26 - 3);
-            } else {
-                decimalComSalto = decimalDoCaractere;
-            }
-            textoDescriptografado += (char) decimalComSalto;
+            codigoDecimalDoCaractere = texto.toLowerCase().charAt(i);
+            textoDescriptografado.append((char) this.descriptar(codigoDecimalDoCaractere));
         }
         
-        return textoDescriptografado;
+        return textoDescriptografado.toString();
+    }
+    
+    private int encriptar(int decimalDoCaractere) {
+        if (decimalDoCaractere > 96 && decimalDoCaractere < 120) {
+            codigoDecimal = decimalDoCaractere + chaveDeCriptografia; 
+        }else if (decimalDoCaractere > 119) {
+            codigoDecimal = decimalDoCaractere - (26 - chaveDeCriptografia);
+        } else {
+            codigoDecimal = decimalDoCaractere;
+        }
+        return codigoDecimal;        
+    }
+    
+    private int descriptar(int decimalDoCaractere) {
+        if (decimalDoCaractere > 99 && decimalDoCaractere < 123) {
+            codigoDecimal = decimalDoCaractere - chaveDeCriptografia; 
+        }else if (decimalDoCaractere > 96 && decimalDoCaractere < 100) {
+            codigoDecimal = decimalDoCaractere + (26 - chaveDeCriptografia);
+        } else {
+            codigoDecimal = decimalDoCaractere;
+        }
+        return codigoDecimal;
     }
 }
