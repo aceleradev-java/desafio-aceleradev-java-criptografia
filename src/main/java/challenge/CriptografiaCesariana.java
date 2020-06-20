@@ -4,7 +4,7 @@ public class CriptografiaCesariana implements Criptografia {
 
     private int codigoDecimalDoCaractere = 0;
     private int codigoDecimal = 0;
-    private int chaveDeCriptografia = 3;
+    private final int CHAVE_DE_CRIPTOGRAFIA = 3;
     
     @Override
     public String criptografar(String texto) {
@@ -42,9 +42,9 @@ public class CriptografiaCesariana implements Criptografia {
     
     private int encriptarLetra(int decimalDoCaractere) {
         if (decimalDoCaractere > 96 && decimalDoCaractere < 120) {
-            codigoDecimal = decimalDoCaractere + chaveDeCriptografia; 
+            codigoDecimal = decimalDoCaractere + CHAVE_DE_CRIPTOGRAFIA; 
         }else if (decimalDoCaractere > 119) {
-            codigoDecimal = decimalDoCaractere - (26 - chaveDeCriptografia);
+            codigoDecimal = decimalDoCaractere - (26 - CHAVE_DE_CRIPTOGRAFIA);
         } else {
             codigoDecimal = decimalDoCaractere;
         }
@@ -53,9 +53,9 @@ public class CriptografiaCesariana implements Criptografia {
     
     private int descriptarLetra(int decimalDoCaractere) {
         if (decimalDoCaractere > 99 && decimalDoCaractere < 123) {
-            codigoDecimal = decimalDoCaractere - chaveDeCriptografia; 
+            codigoDecimal = decimalDoCaractere - CHAVE_DE_CRIPTOGRAFIA; 
         }else if (decimalDoCaractere > 96 && decimalDoCaractere < 100) {
-            codigoDecimal = decimalDoCaractere + (26 - chaveDeCriptografia);
+            codigoDecimal = decimalDoCaractere + (26 - CHAVE_DE_CRIPTOGRAFIA);
         } else {
             codigoDecimal = decimalDoCaractere;
         }
